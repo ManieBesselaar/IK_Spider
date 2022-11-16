@@ -10,11 +10,14 @@ public class Movement : MonoBehaviour
     [SerializeField]
     [Tooltip("How far ahead should the foot placement targets be advanced when moving")] float _footPlacementTargetAdcance = 1f;
     [SerializeField] Transform _footPlacementTargetsParent;
+    [SerializeField][Tooltip("This determines the max walk speed for our spider")] float _maximumCrawlVelocity = 20;
     float _currentInput = 0;
     Vector2 _placementTargetsInitialPos;
+    Rigidbody2D _rb;
     // Start is called before the first frame update
     void Start()
     {
+        _rb = GetComponent<Rigidbody2D>();
         _placementTargetsInitialPos = _footPlacementTargetsParent.localPosition;
     }
 
@@ -26,8 +29,15 @@ public class Movement : MonoBehaviour
       if(_currentInput != 0) //Only move if there is a control input
         {
             //Shift the footPlacement targets to left or right depending on walk direction and rate
-            _footPlacementTargetsParent.localPosition =_placementTargetsInitialPos + (_currentInput * _footPlacementTargetAdcance * Vector2.right);  
-            transform.position += _currentInput * _movementSpeed * Time.deltaTime * transform.right;
+            _footPlacementTargetsParent.localPosition =_placementTargetsInitialPos + (_currentInput * _footPlacementTargetAdcance * Vector2.right);
+            //  transform.position += _currentInput * _movementSpeed * Time.deltaTime * transform.right;
+
+            if(_rb.velocity.sqrMagnitude < _maximumCrawlVelocity)
+            {
+                _rb.AddForce(transform.right * _currentInput * _movementSpeed);
+            }
+            
+        Debug.Log("Body velocity " + _rb.velocity.sqrMagnitude);
         }
      
     }

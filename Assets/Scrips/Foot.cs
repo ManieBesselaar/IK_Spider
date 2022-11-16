@@ -132,8 +132,8 @@ public class Foot : MonoBehaviour
    Vector3 GetTerrain( Vector3 targetedPosition)
     {
        
-        RaycastHit2D _terrainHit = Physics2D.Raycast(_bodyTransform.position, _footPlacementTarget.position - _bodyTransform.position, _raycastDepth);
-        Debug.DrawRay(_bodyTransform.position, _footPlacementTarget.position - _bodyTransform.position, Color.white, 1f);
+        RaycastHit2D _terrainHit = Physics2D.Raycast(_bodyTransform.position, _footPlacementTarget.position - _bodyTransform.position, _raycastDepth,_terrainLayer);
+        Debug.DrawRay(_bodyTransform.position, _footPlacementTarget.position - _bodyTransform.position , Color.white, 1f);
        Debug.Log("Terrain Hit result point " + _terrainHit.point + " layer name is " + _terrainLayer.ToString());
        
         if (_terrainHit.point == Vector2.zero) return targetedPosition; // If the hit does not register any hits then just return the targeted pos
