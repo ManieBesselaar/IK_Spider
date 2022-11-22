@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
     void Update()
     {
         _currentInput = Input.GetAxis("Horizontal"); 
-        //Current unput will have a value between -1 and 1, negative values indicat a left movement and positi
+        //Current unput will have a value between -1 and 1, negative values indicate a left movement and positive right
       if(_currentInput != 0) //Only move if there is a control input
         {
             //Shift the footPlacement targets to left or right depending on walk direction and rate
