@@ -45,6 +45,10 @@ public class Movement : MonoBehaviour
         }
 
     }
+    private void Reset()
+    {
+            
+    }
 
 }
 
